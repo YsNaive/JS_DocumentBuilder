@@ -1,0 +1,54 @@
+:root{
+    --ve-font-size: 14px;
+    --ve-font-family: 'consolas';
+    --ve-line-height: 18px;
+    --ve-half-line-height: 9px;
+    --ve-back-color: #DDD;
+    --ve-sub-back-color: #CCC;
+    --ve-front-color: #666;
+    --ve-label-width: 20%;
+}
+
+* {
+    padding: 0px;
+    margin : 0px;
+    font-size       : var(--ve-font-size);
+    font-family     : var(--ve-font-family);
+    background-color: var(--ve-back-color);
+}
+
+body{
+    flex-direction: column;
+}
+
+.visual-element{
+    display: flex;
+}
+
+.field-drawer{
+    flex-direction: row;
+    min-height: var(--ve-line-height);
+        height: var(--ve-line-height);
+}
+.field-drawer > .icon{
+    height: var(--ve-line-height);
+    width : var(--ve-line-height);
+    background-repeat  : 'no-repeat';
+    background-position: 'center';
+    background-size    : 'contain';
+}
+.field-drawer > .text-element{
+    height: var(--ve-line-height);
+    width : var(--ve-label-width);
+}
+
+.text-input {
+    all: unset;
+    flex-grow       : 1;
+    padding-left    : var(--ve-half-line-height);
+    background-color: var(--ve-sub-back-color);
+    border-color    : var(--ve-front-color);
+    border-width    : 1px;
+    border-style    : solid;
+    border-radius   : 3px;
+}
