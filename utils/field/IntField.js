@@ -24,7 +24,7 @@ export class IntField extends FieldDrawer {
             this.value = num;
         });  // 綁定事件
         this.#inputElement.domElement.value = 0;  
-        this.AddChild(this.#inputElement);  // 將輸入框添加為子元素
+        this.Add(this.#inputElement);  // 將輸入框添加為子元素
 
         let isDragging = false;
         let startX = 0;
@@ -35,9 +35,7 @@ export class IntField extends FieldDrawer {
         this.labelElement.domElement.addEventListener('mousedown', (e) => {
             isDragging = true;
             startX = e.clientX;
-            console.log(this.value);
             startValue = this.value ?? 0;
-            console.log(startValue);
 
             // 禁止選字
             document.body.style.userSelect = 'none';

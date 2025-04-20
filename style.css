@@ -6,7 +6,7 @@
     --ve-back-color: #DDD;
     --ve-sub-back-color: #CCC;
     --ve-front-color: #666;
-    --ve-label-width: 20%;
+    --ve-label-width: 25%;
 }
 
 * {
@@ -21,6 +21,11 @@ body{
     flex-direction: column;
 }
 
+textarea{
+    height: auto;
+    resize: none;
+}
+
 .visual-element{
     display: flex;
 }
@@ -30,21 +35,23 @@ body{
     min-height: var(--ve-line-height);
         height: var(--ve-line-height);
 }
-.field-drawer > .icon{
+.field-drawer .icon{
     height: var(--ve-line-height);
     width : var(--ve-line-height);
     background-repeat  : 'no-repeat';
     background-position: 'center';
     background-size    : 'contain';
 }
-.field-drawer > .text-element{
+.field-drawer > .label-container{
     height: var(--ve-line-height);
     width : var(--ve-label-width);
 }
-
+.field-drawer > .content-container{
+    flex-grow       : 1;
+}
 .text-input {
     all: unset;
-    flex-grow       : 1;
+    width           : 100%;
     padding-left    : var(--ve-half-line-height);
     background-color: var(--ve-sub-back-color);
     border-color    : var(--ve-front-color);

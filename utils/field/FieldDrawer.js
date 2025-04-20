@@ -3,6 +3,7 @@
 import { ImageElement } from '../basic/ImageElement.js';
 import { TextElement } from '../basic/TextElement.js';
 import { VisualElement } from '../basic/VisualElement.js';
+import { Style } from '../Style.js';
 
 /**
  * FieldDrawer：所有欄位元件的基底類別
@@ -17,10 +18,22 @@ export class FieldDrawer extends VisualElement {
         this.SetValueWithoutNotify(val);
         this.NotifyValueChange(val);
     }
-    
+
+    #iconElement;
+
     #labelElement;
     get labelElement() {
         return this.#labelElement;
+    }
+
+    #labelContainer;
+    get labelContainer(){
+        return this.#labelContainer;
+    }
+
+    #contentContainer;
+    get contentContainer(){
+        return this.#contentContainer;
     }
 
     /**
@@ -30,8 +43,12 @@ export class FieldDrawer extends VisualElement {
         super('div');
         this.AddClass('field-drawer');
 
-        this.iconElement = new ImageElement("");
-        this.AddChild(this.iconElement);
+        this.#labelContainer = new VisualElement();
+        this.#labelContainer.flexDirection = 'row';
+        this.#labelContainer.AddClass('label-container');
+
+        this.#iconElement = new ImageElement("");
+        this.#labelContainer.Add(this.#iconElement);
 
         // 初始化內部值
         this.#value = null;
@@ -39,12 +56,30 @@ export class FieldDrawer extends VisualElement {
 
         this.#labelElement = new TextElement();
         this.textContent = label; 
-        this.AddChild(this.#labelElement);
+        this.#labelContainer.Add(this.#labelElement);
+
+        this.#contentContainer = new VisualElement();
+        this.#contentContainer.AddClass('content-container');
+
+        this.AddInHierarchy(this.#labelContainer);
+        this.AddInHierarchy(this.#contentContainer);
     }
 
     set textContent(value){
         this.#labelElement.textContent = value;
         this.#labelElement.display = value == '' ? "none" : "flex";
+    }
+
+    LayoutInline(){
+        this.flexDirection = 'row';
+        this.height = Style.lineHeight
+        this.#contentContainer.marginLeft = '';
+    }
+
+    LayoutExpand(){
+        this.flexDirection = 'column';
+        this.height = 'auto'
+        this.#contentContainer.marginLeft = Style.lineHeight;
     }
 
     /**
