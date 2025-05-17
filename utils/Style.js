@@ -1,6 +1,8 @@
 export class Style {
     static #root = document.documentElement;
 
+    static icon_url_arrow = "url(./resource/image/WhiteArrow.png)";
+
     static #getVar(name) {
         return getComputedStyle(this.#root).getPropertyValue(name).trim();
     }

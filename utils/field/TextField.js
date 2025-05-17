@@ -20,7 +20,7 @@ export class TextField extends FieldDrawer {
 
         // 建立多行輸入框
         this.#inputElement = new VisualElement('textarea');
-        this.#inputElement.AddClass('text-input');
+        this.#inputElement.AddClass('input-field');
         let lastLines = 0;
         this.#inputElement.domElement.addEventListener('input', (e) => {
             const inputValue = e.target.value;

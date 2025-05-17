@@ -14,11 +14,10 @@
     margin : 0px;
     font-size       : var(--ve-font-size);
     font-family     : var(--ve-font-family);
-    background-color: var(--ve-back-color);
 }
 
-body{
-    flex-direction: column;
+html, body{
+    height: 100%;
 }
 
 textarea{
@@ -28,6 +27,7 @@ textarea{
 
 .visual-element{
     display: flex;
+    flex-direction: column;
 }
 
 .field-drawer{
@@ -38,9 +38,9 @@ textarea{
 .field-drawer .icon{
     height: var(--ve-line-height);
     width : var(--ve-line-height);
-    background-repeat  : 'no-repeat';
-    background-position: 'center';
-    background-size    : 'contain';
+    image-rendering: pixelated;
+    background-size: contain;
+    user-select: none;
 }
 .field-drawer > .label-container{
     height: var(--ve-line-height);
@@ -49,7 +49,12 @@ textarea{
 .field-drawer > .content-container{
     flex-grow       : 1;
 }
-.text-input {
+
+.text-element{
+    caret-color: transparent;
+}
+
+.input-field {
     all: unset;
     width           : 100%;
     padding-left    : var(--ve-half-line-height);

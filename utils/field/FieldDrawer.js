@@ -20,6 +20,9 @@ export class FieldDrawer extends VisualElement {
     }
 
     #iconElement;
+    get iconElement() {
+        return this.#iconElement;
+    }
 
     #labelElement;
     get labelElement() {
@@ -36,6 +39,16 @@ export class FieldDrawer extends VisualElement {
         return this.#contentContainer;
     }
 
+    #fixedLabelWidth;
+    get fixedLabelWidth(){
+        return this.#fixedLabelWidth;
+    }
+    set fixedLabelWidth(val){
+        this.#fixedLabelWidth = val;
+        this.textContent = this.textContent;
+    }
+
+    #onChange;
     /**
      * @param {string} label 欄位標籤文字
      */
@@ -52,10 +65,10 @@ export class FieldDrawer extends VisualElement {
 
         // 初始化內部值
         this.#value = null;
-        this.onChange = null;
+        this.#onChange = new Array();
+        this.#fixedLabelWidth = true;
 
         this.#labelElement = new TextElement();
-        this.textContent = label; 
         this.#labelContainer.Add(this.#labelElement);
 
         this.#contentContainer = new VisualElement();
@@ -63,11 +76,17 @@ export class FieldDrawer extends VisualElement {
 
         this.AddInHierarchy(this.#labelContainer);
         this.AddInHierarchy(this.#contentContainer);
+        
+        this.textContent = label; 
     }
 
+    get textContent(){
+        return this.#labelElement.textContent;
+    }
     set textContent(value){
         this.#labelElement.textContent = value;
-        this.#labelElement.display = value == '' ? "none" : "flex";
+        if(this.#fixedLabelWidth)
+            this.#labelContainer.width = (value == '' ? Style.lineHeight : Style.labelWidth);
     }
 
     LayoutInline(){
@@ -87,7 +106,7 @@ export class FieldDrawer extends VisualElement {
      * @param {function(value):void} callback
      */
     RegisterChangeCallback(callback) {
-        this.onChange = callback;
+        this.#onChange.push(callback);
     }
 
 
@@ -96,9 +115,11 @@ export class FieldDrawer extends VisualElement {
      * @param {*} val
      */
     NotifyValueChange(val) {
-        if (typeof this.onChange === 'function') {
-            this.onChange(val);
-        }
+        this.#onChange.forEach(callback => {
+            if (typeof callback === 'function') {
+                callback(val);
+            }
+        });
     }
 
     SetValueWithoutNotify(val){

@@ -17,7 +17,7 @@ export class IntField extends FieldDrawer {
 
         // 使用 VisualElement 創建 <input> 元素
         this.#inputElement = new VisualElement('input');
-        this.#inputElement.AddClass('text-input');
+        this.#inputElement.AddClass('input-field');
         this.#inputElement.domElement.type = 'number';  // 設定為數字類型的輸入框
         this.#inputElement.domElement.addEventListener('input', (e) => {
             const num = Number.parseInt(e.target.value);
@@ -30,9 +30,9 @@ export class IntField extends FieldDrawer {
         let startX = 0;
         let startValue = 0;
 
-        this.labelElement.domElement.style.cursor = 'ew-resize';  // 顯示可左右拖曳的滑鼠樣式
+        this.labelContainer.domElement.style.cursor = 'ew-resize';  // 顯示可左右拖曳的滑鼠樣式
 
-        this.labelElement.domElement.addEventListener('mousedown', (e) => {
+        this.labelContainer.domElement.addEventListener('mousedown', (e) => {
             isDragging = true;
             startX = e.clientX;
             startValue = this.value ?? 0;
